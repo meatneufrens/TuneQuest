@@ -1,0 +1,656 @@
+/* style.css */
+
+:root {
+  --BgDark: #081a2b;
+  --BgDarkSoft: #0d2540;
+  --Lime: #7dff9a;
+  --LimeSoft: #b6ffd0;
+  --White: #ffffff;
+  --Glass: rgba(255, 255, 255, 0.08);
+  --GlassStrong: rgba(255, 255, 255, 0.14);
+  --Shadow: rgba(0, 0, 0, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #0f2f55, var(--BgDark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--White);
+}
+
+.AppStage {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.AmbientGlow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(125,255,154,0.18), transparent 42%),
+    radial-gradient(circle at 75% 80%, rgba(125,255,154,0.14), transparent 46%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.PhoneFrame {
+  width: 380px;
+  height: 760px;
+  background: linear-gradient(180deg, #0a1f35, #050f1c);
+  border-radius: 36px;
+  padding: 14px;
+  box-shadow:
+    0 40px 120px var(--Shadow),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+  position: relative;
+  z-index: 2;
+}
+
+.PhoneNotch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 140px;
+  height: 22px;
+  background: #02070d;
+  border-radius: 0 0 14px 14px;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.PhoneScreen {
+  background: linear-gradient(180deg, var(--BgDarkSoft), var(--BgDark));
+  border-radius: 26px;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.Header {
+  height: 56px;
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+  padding: 0 8px;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px);
+}
+
+.HeaderTitle {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.HeaderButton {
+  background: none;
+  border: none;
+  color: var(--Lime);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.HeaderButton--ghost {
+  opacity: 0.6;
+}
+
+.Screens {
+  flex: 1;
+  position: relative;
+}
+
+.Screen {
+  position: absolute;
+  inset: 0;
+  padding: 20px;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: 0.35s ease;
+}
+
+.Screen.IsActive {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.CenterStack {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 26px;
+}
+
+.Logo {
+  text-align: center;
+}
+
+.LogoIcon {
+  display: inline-flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.LogoIcon span {
+  width: 10px;
+  height: 20px;
+  background: var(--Lime);
+  border-radius: 4px;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.LogoIcon span:nth-child(2) { animation-delay: 0.15s; }
+.LogoIcon span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scaleY(0.5); }
+  40% { transform: scaleY(1); }
+}
+
+.LogoText h2 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.LogoText p {
+  margin: 4px 0 0;
+  color: var(--LimeSoft);
+  font-size: 14px;
+}
+
+.Card {
+  background: var(--Glass);
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  backdrop-filter: blur(14px);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+.MicroHint {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  line-height: 1.35;
+}
+
+.Input {
+  background: rgba(0,0,0,0.35);
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  color: var(--White);
+  outline: none;
+}
+
+.Input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.PrimaryButton,
+.SecondaryButton,
+.MainButton,
+.MiniButton,
+.StringButton {
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.PrimaryButton {
+  background: linear-gradient(135deg, var(--Lime), #4bff80);
+  color: #052012;
+  font-weight: 800;
+  padding: 14px;
+}
+
+.SecondaryButton {
+  background: rgba(255,255,255,0.08);
+  color: var(--White);
+  padding: 14px;
+}
+
+.MainButton {
+  background: var(--GlassStrong);
+  color: var(--White);
+  font-size: 16px;
+  font-weight: 650;
+  padding: 16px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+}
+
+.MainButton--glow {
+  box-shadow:
+    0 18px 42px rgba(0,0,0,0.35),
+    0 0 0 1px rgba(125,255,154,0.14),
+    0 0 40px rgba(125,255,154,0.18);
+}
+
+.MainButton.Premium {
+  background: linear-gradient(135deg, #4bff80, #1affb3);
+  color: #04311c;
+}
+
+.MainButton--active {
+  box-shadow:
+    0 0 0 1px rgba(125,255,154,0.25),
+    0 0 28px rgba(125,255,154,0.18);
+}
+
+.PrimaryButton:hover,
+.SecondaryButton:hover,
+.MainButton:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.XpRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.XpBar {
+  flex: 1;
+  height: 10px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.XpFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--Lime), #4bff80);
+}
+
+.LevelText {
+  font-size: 14px;
+  color: var(--LimeSoft);
+  font-weight: 600;
+}
+
+.Hero {
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 18px 50px rgba(0,0,0,0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.Hero::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 30% 30%, rgba(125,255,154,0.20), transparent 50%);
+  filter: blur(10px);
+}
+
+.HeroTitle {
+  position: relative;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.HeroSub {
+  position: relative;
+  margin-top: 4px;
+  color: rgba(255,255,255,0.75);
+  font-size: 13px;
+}
+
+.Quest {
+  background: var(--Glass);
+  padding: 14px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.QuestHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.QuestBar {
+  height: 8px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.QuestBar div {
+  height: 100%;
+  background: var(--Lime);
+}
+
+.MiniButton {
+  padding: 7px 10px;
+  font-size: 12px;
+  background: rgba(255,255,255,0.15);
+  color: var(--White);
+}
+
+.Perks {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: rgba(255,255,255,0.88);
+}
+
+.LeaderboardRow {
+  background: var(--Glass);
+  padding: 14px;
+  border-radius: 14px;
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.Rank {
+  font-weight: 900;
+  color: var(--Lime);
+}
+
+.Avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--Lime), #4bff80);
+  margin: 0 auto;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.35),
+    0 0 42px rgba(125,255,154,0.18);
+}
+
+.ProfileName {
+  text-align: center;
+  margin: 10px 0 0;
+}
+
+.Stats {
+  background: var(--Glass);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.Badges {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.Badges span {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+.TreePanel {
+  background: rgba(255,255,255,0.06);
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+.TreeScroll {
+  height: 420px;
+  overflow: auto;
+  padding: 10px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.18);
+}
+
+.TreeLane {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 780px;
+}
+
+.TreeNode {
+  width: 100%;
+  border-radius: 16px;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+}
+
+.TreeNode.IsUnlocked {
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+  cursor: pointer;
+  box-shadow:
+    0 16px 40px rgba(0,0,0,0.30),
+    0 0 0 1px rgba(125,255,154,0.10),
+    0 0 36px rgba(125,255,154,0.14);
+}
+
+.TreeNode.IsLocked {
+  background: rgba(255,255,255,0.06);
+  opacity: 0.55;
+  cursor: pointer;
+}
+
+.TreeNodeBadge {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: #052012;
+  background: linear-gradient(135deg, var(--Lime), #4bff80);
+}
+
+.TreeNode.IsLocked .TreeNodeBadge {
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+.TreeNodeTitle {
+  font-weight: 850;
+}
+
+.TreeNodeSub {
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+}
+
+.TreeConnector {
+  height: 28px;
+  width: 6px;
+  margin: 0 auto;
+  border-radius: 999px;
+  background: rgba(125,255,154,0.22);
+  box-shadow: 0 0 26px rgba(125,255,154,0.18);
+}
+
+.TreeSpacer {
+  height: 80px;
+}
+
+.LessonCard {
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 26px 70px rgba(0,0,0,0.35);
+}
+
+.LessonHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 12px;
+}
+
+.LessonTitle {
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+.LessonSub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+}
+
+.LessonProgress {
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.12);
+  margin-bottom: 14px;
+}
+
+.LessonProgressFill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--Lime), #4bff80);
+  transition: width 0.25s ease;
+}
+
+.GuitarDeck {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 8px 0 14px;
+}
+
+.StringButton {
+  padding: 16px 14px;
+  background: rgba(0,0,0,0.28);
+  color: var(--Lime);
+  font-weight: 900;
+  font-size: 18px;
+  border-radius: 16px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 16px 36px rgba(0,0,0,0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.StringButton::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: radial-gradient(circle at 30% 30%, rgba(125,255,154,0.22), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.StringButton:active {
+  transform: scale(0.98);
+}
+
+.StringButton:active::after {
+  opacity: 1;
+}
+
+.StringButton.IsHit {
+  background: rgba(125,255,154,0.14);
+  box-shadow:
+    inset 0 0 0 1px rgba(125,255,154,0.28),
+    0 16px 40px rgba(0,0,0,0.30),
+    0 0 30px rgba(125,255,154,0.18);
+  color: var(--White);
+}
+
+.LessonFooter {
+  display: flex;
+  gap: 10px;
+}
+
+.Toast {
+  position: absolute;
+  left: 50%;
+  bottom: 78px;
+  transform: translateX(-50%);
+  min-width: 220px;
+  max-width: 320px;
+  background: rgba(0,0,0,0.55);
+  color: var(--White);
+  border-radius: 14px;
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.45);
+}
+
+.Toast.IsVisible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-6px);
+}
+
+.BottomNav {
+  height: 64px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: rgba(0,0,0,0.30);
+  backdrop-filter: blur(10px);
+}
+
+.BottomNav button {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@media (max-width: 420px) {
+  .PhoneFrame {
+    width: min(380px, 92vw);
+    height: min(760px, 92vh);
+  }
+}
