@@ -23,6 +23,8 @@
           <button class="HeaderButton HeaderButton--ghost" type="button" data-action="Menu">⋯</button>
         </header>
 
+        
+
         <!-- SCREENS -->
         <main class="Screens">
 
@@ -98,7 +100,7 @@
               <button class="MainButton MainButton--glow" type="button" data-nav="SkillTree">Start Lessons</button>
               <button class="MainButton" type="button" data-nav="DailyQuests">Daily Quests</button>
               <button class="MainButton" type="button" data-nav="Leaderboard">Leaderboard</button>
-              <button class="MainButton Premium" type="button" data-nav="Premium">Go Premium</button>
+              <button class="MainButton Premium goPremium" type="button" data-nav="Premium">Go Premium</button>
             </div>
           </section>
 
@@ -155,6 +157,11 @@
                 Scroll the tree, then tap Node 1 for a sample lesson.
               </div>
             </div>
+
+            <div class="ads small-ad">      
+              advertisement goes here
+            </div>
+
           </section>
 
           <!-- SAMPLE LESSON (CLICK STRINGS) -->
@@ -231,12 +238,69 @@
                   <li>Unlock More Instruments</li>
                   <li>Faster Progression</li>
                 </ul>
-                <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Premium is showcase-only.">
+                <h2>
+                  Only for $X.XX !!
+                </h2>
+                <button class="PrimaryButton" type="button" data-action="Toast" data-nav="PaymentForPremium">
                   Upgrade to Premium
                 </button>
               </div>
             </div>
           </section>
+
+          <!-- PAYMENT FOR PREMIUM   -->
+           <section class="Screen" data-screen="PaymentForPremium" data-title="Payment">
+              <div class="Content">
+                <div class="Card">
+                  <div class="Card">
+                    <p class="payment-field">
+                      Card Number
+                    </p>
+                    <input value="XXXX-XXXX-XXXX" disabled>
+                  </div>
+                  <div class="Card">
+                    <p class="payment-field">
+                      Expiration date
+                    </p>
+                    <input value="MM/YYYY" disabled>
+                  </div>
+                  <div class="Card">
+                    <p class="payment-field">
+                      CVC
+                    </p>
+                    <input value="XXX" disabled>
+                  </div>           
+                </div>
+                <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Transaction successful" id="get-premium" data-nav="Profile">
+                  Confirm payment
+                </button>
+              </div>
+           </section>
+
+          <!-- REMOVE PREMIUM CONFIRMATION  -->
+           <section class="Screen" data-screen="removePremium" data-title="Remove premium">
+              <div class="Content">
+                <div class="Card">
+                  Are you sure you want to remove premium ?
+                </div>
+              <button class="SecondaryButton" type="button" id="confirm-remove-premium" data-nav="Profile" data-toast="Premium removal successful" data-action="Toast">
+                  yes
+              </button>
+              <button class="SecondaryButton" type="button" data-nav="Profile" data-toast="Premium removal cancelled" data-action="Toast">
+                  No
+              </button>
+              </div>
+           </section>
+
+
+          <!-- AD -->
+          <section class="Screen ads page-ad" data-screen="ad" data-title="get premium to remove ads" >
+            Advertisement goes here
+            <button class="close-ad">
+              X
+            </button>
+          </section>
+
 
           <!-- LEADERBOARD -->
           <section class="Screen" data-screen="Leaderboard" data-title="Leaderboard">
@@ -274,6 +338,10 @@
               <div class="Badges">
                 <span></span><span></span><span></span><span></span>
               </div>
+              <button class="MainButton Premium goPremium" type="button" data-nav="Premium">Go Premium</button>
+              <button class="PrimaryButton" type="button" data-nav="removePremium" id="remove-premium">
+                  remove premium
+              </button>
             </div>
           </section>
 

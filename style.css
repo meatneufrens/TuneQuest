@@ -648,6 +648,40 @@ body {
   cursor: pointer;
 }
 
+
+
+.ads {
+  background-color: white;
+  color:black;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.close-ad {
+  display: block;
+  position: absolute;
+  top:2%;
+  right:5%;
+  border-radius: 50%;
+  border : 2px outset black ;
+  padding: 5px;
+  width: 40px;
+  height :40px;
+  font-size: large;
+}
+.small-ad {
+  height:5em;
+  width:100%;
+}
+
+.payment-field {
+  margin:5px;
+}
+#remove-premium {
+  background: linear-gradient(135deg, #fa1313, #ff6a6a)
+}
 @media (max-width: 420px) {
   .PhoneFrame {
     width: min(380px, 92vw);

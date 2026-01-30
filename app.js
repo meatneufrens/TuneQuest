@@ -5,8 +5,12 @@ const HeaderTitle = document.querySelector("[data-title]");
 const ToastBox = document.querySelector("[data-toastbox]");
 const BackButton = document.querySelector('[data-action="Back"]');
 
+let IsPremiumUser = false;
+const adChance = 0.75; // chance to load ad page
+
 const State = {
   CurrentScreen: "Instrument",
+  NextScreen: "", // for when ad page laods
   SelectedInstrument: "Guitar",
   LessonHitStrings: new Set()
 };
@@ -80,6 +84,18 @@ function BindNav() {
         ShowToast("Choose an instrument first !");
         return;
       }
+
+      // chance to roll ad if not premium
+      if (!IsPremiumUser){
+        if (Target === "SkillTree" || Target === "DailyQuests" || Target === "LeaderBoard"){
+          if (Math.random() > (1.0 - adChance) ){
+            State.NextScreen = Target;
+            ShowScreen("ad");
+            return;
+          }
+        }
+      }
+
 
       ShowScreen(Target);
     });
@@ -240,3 +256,50 @@ function Boot() {
 }
 
 Boot();
+
+// logic for toggling premium status  ///////
+const getPremiumBtn = document.querySelector("#get-premium");
+const removePremiumBtn = document.querySelector("#remove-premium");
+const confirmRemovePremiumBtn = document.querySelector("#confirm-remove-premium");
+removePremiumBtn.style.display = "none";
+
+getPremiumBtn.addEventListener("click",function(){
+  IsPremiumUser = true;
+  // hides ads for "premium" user 
+  let smallAds = document.querySelectorAll(".small-ad");
+  smallAds.forEach(ad => {
+    ad.style.display = "none";
+  });
+
+  const goPremiumButtons = document.querySelectorAll(".goPremium");
+  goPremiumButtons.forEach(GPbutton => {
+    GPbutton.style.display = "none";
+  });
+
+  removePremiumBtn.style.display = "inline-block";
+})
+
+confirmRemovePremiumBtn.addEventListener("click",function() {
+  IsPremiumUser = false;
+  const smallAds = document.querySelectorAll(".small-ad");
+  smallAds.forEach(ad => {
+    ad.style.display = "flex";
+  });
+
+  const goPremiumButtons = document.querySelectorAll(".goPremium");
+  goPremiumButtons.forEach(GPbutton => {
+    GPbutton.style.display = "inline-block";
+  });
+
+  removePremiumBtn.style.display = "none";
+})
+
+////////////////////////////////////////
+
+const closeAdBtns = document.querySelectorAll(".close-ad");
+
+closeAdBtns.forEach(closeAdBtn => {
+  closeAdBtn.addEventListener("click",function() {
+    ShowScreen(State.NextScreen);
+  });
+})
