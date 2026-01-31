@@ -6,13 +6,14 @@ const ToastBox = document.querySelector("[data-toastbox]");
 const BackButton = document.querySelector('[data-action="Back"]');
 
 let IsPremiumUser = false;
-const adChance = 0.75; // chance to load ad page
+const AdChance = 0.75;
 
 const State = {
   CurrentScreen: "Instrument",
-  NextScreen: "", // for when ad page laods
+  NextScreen: "",
   SelectedInstrument: "Guitar",
-  LessonHitStrings: new Set()
+  LessonHitStrings: new Set(),
+  Coins: 250
 };
 
 function GetScreenTitle(ScreenName) {
@@ -20,9 +21,13 @@ function GetScreenTitle(ScreenName) {
   if (!Screen) {
     return "TuneQuest";
   }
+  return Screen.dataset.title || ScreenName;
+}
 
-  const Title = Screen.dataset.title;
-  return Title || ScreenName;
+function UpdateCoinDisplays() {
+  document.querySelectorAll("[data-coins]").forEach(Node => {
+    Node.textContent = String(State.Coins);
+  });
 }
 
 function ShowScreen(ScreenName) {
@@ -32,6 +37,7 @@ function ShowScreen(ScreenName) {
 
   State.CurrentScreen = ScreenName;
   HeaderTitle.textContent = GetScreenTitle(ScreenName);
+  UpdateCoinDisplays();
 }
 
 let ToastTimerHandle = null;
@@ -55,11 +61,7 @@ function ShowToast(Message) {
 }
 
 function SetPressedStyle(Button, IsPressed) {
-  if (IsPressed) {
-    Button.style.transform = "scale(0.97)";
-    return;
-  }
-  Button.style.transform = "";
+  Button.style.transform = IsPressed ? "scale(0.97)" : "";
 }
 
 function BindPressFeedback() {
@@ -85,17 +87,15 @@ function BindNav() {
         return;
       }
 
-      // chance to roll ad if not premium
-      if (!IsPremiumUser){
-        if (Target === "SkillTree" || Target === "DailyQuests" || Target === "LeaderBoard"){
-          if (Math.random() > (1.0 - adChance) ){
+      if (!IsPremiumUser) {
+        if (Target === "SkillTree" || Target === "DailyQuests" || Target === "Leaderboard") {
+          if (Math.random() > (1.0 - AdChance)) {
             State.NextScreen = Target;
             ShowScreen("ad");
             return;
           }
         }
       }
-
 
       ShowScreen(Target);
     });
@@ -105,6 +105,9 @@ function BindNav() {
 function BindToasts() {
   document.querySelectorAll('[data-action="Toast"]').forEach(Button => {
     Button.addEventListener("click", () => {
+      if (Button.dataset.nav) {
+        return;
+      }
       const Message = Button.dataset.toast || "Showcase only !";
       ShowToast(Message);
     });
@@ -201,6 +204,8 @@ function BindLesson() {
 
         if (State.LessonHitStrings.size === 6) {
           ShowToast("Nice. Lesson complete (showcase)!");
+          State.Coins += 15;
+          UpdateCoinDisplays();
         } else {
           ShowToast("Good hit.");
         }
@@ -240,66 +245,68 @@ function BindBack() {
       return;
     }
 
+    if (Current === "PaymentForPremium") {
+      ShowScreen("Premium");
+      return;
+    }
+
     ShowScreen("Home");
+  });
+}
+
+function SetPremiumUser(IsPremium) {
+  IsPremiumUser = IsPremium;
+
+  const GoPremiumButtons = document.querySelectorAll(".goPremium");
+  GoPremiumButtons.forEach(Button => {
+    Button.style.display = IsPremiumUser ? "none" : "inline-block";
+  });
+
+  const RemovePremiumButton = document.querySelector("#remove-premium");
+  if (RemovePremiumButton) {
+    RemovePremiumButton.style.display = IsPremiumUser ? "inline-block" : "none";
+  }
+}
+
+function BindPremiumToggle() {
+  const GetPremiumButton = document.querySelector("#get-premium");
+  const ConfirmRemovePremiumButton = document.querySelector("#confirm-remove-premium");
+
+  const RemovePremiumButton = document.querySelector("#remove-premium");
+  if (RemovePremiumButton) {
+    RemovePremiumButton.style.display = "none";
+  }
+
+  GetPremiumButton?.addEventListener("click", () => {
+    SetPremiumUser(true);
+  });
+
+  ConfirmRemovePremiumButton?.addEventListener("click", () => {
+    SetPremiumUser(false);
+  });
+}
+
+function BindAdClose() {
+  document.querySelectorAll(".close-ad").forEach(Button => {
+    Button.addEventListener("click", () => {
+      ShowScreen(State.NextScreen || "Home");
+    });
   });
 }
 
 function Boot() {
   ShowScreen(State.CurrentScreen);
+  UpdateCoinDisplays();
+
   BindNav();
   BindToasts();
   BindInstrumentSelect();
   BindSkillTree();
   BindLesson();
   BindBack();
+  BindPremiumToggle();
+  BindAdClose();
   BindPressFeedback();
 }
 
 Boot();
-
-// logic for toggling premium status  ///////
-const getPremiumBtn = document.querySelector("#get-premium");
-const removePremiumBtn = document.querySelector("#remove-premium");
-const confirmRemovePremiumBtn = document.querySelector("#confirm-remove-premium");
-removePremiumBtn.style.display = "none";
-
-getPremiumBtn.addEventListener("click",function(){
-  IsPremiumUser = true;
-  // hides ads for "premium" user 
-  let smallAds = document.querySelectorAll(".small-ad");
-  smallAds.forEach(ad => {
-    ad.style.display = "none";
-  });
-
-  const goPremiumButtons = document.querySelectorAll(".goPremium");
-  goPremiumButtons.forEach(GPbutton => {
-    GPbutton.style.display = "none";
-  });
-
-  removePremiumBtn.style.display = "inline-block";
-})
-
-confirmRemovePremiumBtn.addEventListener("click",function() {
-  IsPremiumUser = false;
-  const smallAds = document.querySelectorAll(".small-ad");
-  smallAds.forEach(ad => {
-    ad.style.display = "flex";
-  });
-
-  const goPremiumButtons = document.querySelectorAll(".goPremium");
-  goPremiumButtons.forEach(GPbutton => {
-    GPbutton.style.display = "inline-block";
-  });
-
-  removePremiumBtn.style.display = "none";
-})
-
-////////////////////////////////////////
-
-const closeAdBtns = document.querySelectorAll(".close-ad");
-
-closeAdBtns.forEach(closeAdBtn => {
-  closeAdBtn.addEventListener("click",function() {
-    ShowScreen(State.NextScreen);
-  });
-})
