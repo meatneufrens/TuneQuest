@@ -79,10 +79,11 @@ body {
   flex-direction: column;
 }
 
+/* HEADER */
 .Header {
   height: 56px;
   display: grid;
-  grid-template-columns: 48px 1fr 48px;
+  grid-template-columns: 48px 1fr auto;
   align-items: center;
   padding: 0 8px;
   background: rgba(0,0,0,0.25);
@@ -108,6 +109,31 @@ body {
   opacity: 0.6;
 }
 
+.HeaderRight {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: end;
+}
+
+.CoinPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.22);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+  font-weight: 800;
+  font-size: 12px;
+  color: rgba(255,255,255,0.9);
+}
+
+.CoinPill--small {
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
 .Screens {
   flex: 1;
   position: relative;
@@ -128,6 +154,10 @@ body {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+}
+
+.Screen--NoScroll {
+  overflow: hidden;
 }
 
 .CenterStack {
@@ -648,40 +678,210 @@ body {
   cursor: pointer;
 }
 
-
-
+/* ADS - FULL SCREEN (DUOLINGO-LIKE) */
 .ads {
-  background-color: white;
-  color:black;
-  margin: auto;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: none;
+  color: inherit;
 }
-.close-ad {
-  display: block;
-  position: absolute;
-  top:2%;
-  right:5%;
-  border-radius: 50%;
-  border : 2px outset black ;
-  padding: 5px;
+
+.AdCloseButton {
   width: 40px;
-  height :40px;
-  font-size: large;
+  height: 40px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  background: rgba(0,0,0,0.28);
+  color: rgba(255,255,255,0.92);
+  font-size: 24px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 14px 30px rgba(0,0,0,0.28);
 }
-.small-ad {
-  height:5em;
-  width:100%;
+
+.AdCloseButton:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.AdFull {
+  position: absolute;
+  inset: 0;
+  padding: 18px 18px 16px;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(125,255,154,0.16), transparent 55%),
+    linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.22));
+}
+
+.AdFullTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.AdFullBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  text-align: center;
+  padding: 8px 8px 0;
+}
+
+.AdFullBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  color: rgba(255,255,255,0.92);
+}
+
+.AdLabel {
+  font-size: 11px;
+  letter-spacing: 0.35px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+}
+
+.AdFullTitle {
+  font-weight: 950;
+  font-size: 20px;
+}
+
+.AdFullSub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+}
+
+.AdFullVisual {
+  height: 210px;
+  border-radius: 22px;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(0,0,0,0.20);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 26px 70px rgba(0,0,0,0.35);
+}
+
+.AdFullOrb {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 35% 30%, rgba(125,255,154,0.40), rgba(0,0,0,0.05) 55%);
+  filter: blur(1px);
+}
+
+.AdFullWave {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 80%, rgba(125,255,154,0.18), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.10), transparent 55%);
+  opacity: 0.9;
+}
+
+.AdFullBottom {
+  display: flex;
+  gap: 10px;
+}
+
+/* SHOP */
+.ShopHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ShopTitle {
+  font-weight: 900;
+}
+
+.SkinGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.SkinCard {
+  background: var(--Glass);
+  border-radius: 18px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+.SkinPreview {
+  height: 86px;
+  border-radius: 16px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.08),
+    0 18px 40px rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.25);
+}
+
+.SkinPreview--lime {
+  background: radial-gradient(circle at 30% 25%, rgba(125,255,154,0.35), rgba(0,0,0,0.30));
+}
+
+.SkinPreview--midnight {
+  background: radial-gradient(circle at 30% 25%, rgba(120,170,255,0.28), rgba(0,0,0,0.35));
+}
+
+.SkinPreview--ember {
+  background: radial-gradient(circle at 30% 25%, rgba(255,135,90,0.28), rgba(0,0,0,0.35));
+}
+
+.SkinMeta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.SkinName {
+  font-weight: 900;
+}
+
+.SkinPrice {
+  color: rgba(255,255,255,0.85);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+/* PREMIUM REMOVE */
+#remove-premium {
+  background: linear-gradient(135deg, #fa1313, #ff6a6a);
 }
 
 .payment-field {
-  margin:5px;
+  margin: 5px;
 }
-#remove-premium {
-  background: linear-gradient(135deg, #fa1313, #ff6a6a)
-}
+
 @media (max-width: 420px) {
   .PhoneFrame {
     width: min(380px, 92vw);
