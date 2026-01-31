@@ -1,0 +1,433 @@
+<!-- Index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TuneQuest – Showcase</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="AppStage">
+    <div class="AmbientGlow"></div>
+
+    <div class="PhoneFrame">
+      <div class="PhoneNotch"></div>
+
+      <div class="PhoneScreen">
+
+        <!-- HEADER -->
+        <header class="Header">
+          <button class="HeaderButton" type="button" data-action="Back" aria-label="Back">‹</button>
+
+          <h1 class="HeaderTitle" data-title>Welcome</h1>
+
+          <div class="HeaderRight">
+            <div class="CoinPill" aria-label="Coins">
+              <span class="CoinIcon" aria-hidden="true">🪙</span>
+              <span data-coins>250</span>
+            </div>
+            <button class="HeaderButton HeaderButton--ghost" type="button" data-action="Menu" aria-label="Menu">⋯</button>
+          </div>
+        </header>
+
+        <!-- SCREENS -->
+        <main class="Screens">
+
+          <!-- INSTRUMENT SELECT -->
+          <section class="Screen IsActive" data-screen="Instrument" data-title="Choose Instrument">
+            <div class="CenterStack">
+              <div class="Logo">
+                <div class="LogoIcon">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="LogoText">
+                  <h2>TuneQuest</h2>
+                  <p>Pick your instrument to begin</p>
+                </div>
+              </div>
+
+              <div class="Card">
+                <button class="MainButton" type="button" data-instrument="Drums">Drums</button>
+                <button class="MainButton MainButton--active" type="button" data-instrument="Guitar">Guitar</button>
+                <button class="MainButton" type="button" data-instrument="Piano">Piano</button>
+
+                <div class="MicroHint">
+                  Only Guitar is enabled in this showcase.
+                </div>
+
+                <button class="PrimaryButton" type="button" data-action="InstrumentContinue">
+                  Continue
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- LOGIN -->
+          <section class="Screen" data-screen="Login" data-title="TuneQuest">
+            <div class="CenterStack">
+              <div class="Logo">
+                <div class="LogoIcon">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="LogoText">
+                  <h2>TuneQuest</h2>
+                  <p>Learn Music, the Fun Way</p>
+                </div>
+              </div>
+
+              <div class="Card">
+                <input class="Input" type="text" placeholder="Username" />
+                <input class="Input" type="password" placeholder="Password" />
+
+                <button class="PrimaryButton" type="button" data-nav="Home">Login</button>
+                <button class="SecondaryButton" type="button" data-action="Toast" data-toast="Sign up is a showcase-only screen.">
+                  Sign Up
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- HOME -->
+          <section class="Screen" data-screen="Home" data-title="Home">
+            <div class="Content">
+              <div class="XpRow">
+                <div class="XpBar">
+                  <div class="XpFill" style="width: 40%"></div>
+                </div>
+                <div class="LevelText">Level 3</div>
+              </div>
+
+              <div class="Hero">
+                <div class="HeroTitle">TuneQuest</div>
+                <div class="HeroSub">Welcome to TuneQuest !</div>
+              </div>
+
+              <button class="MainButton MainButton--glow" type="button" data-nav="SkillTree">Start Lessons</button>
+              <button class="MainButton" type="button" data-nav="DailyQuests">Daily Quests</button>
+              <button class="MainButton" type="button" data-nav="Leaderboard">Leaderboard</button>
+
+              <button class="MainButton" type="button" data-nav="SkinsShop">Skins Shop</button>
+
+              <button class="MainButton Premium goPremium" type="button" data-nav="Premium">Go Premium</button>
+            </div>
+          </section>
+
+          <!-- SKILL TREE -->
+          <section class="Screen Screen--NoScroll" data-screen="SkillTree" data-title="Skill Tree">
+            <div class="Content">
+              <div class="TreePanel">
+                <div class="TreeScroll" aria-label="Scrollable skill tree">
+                  <div class="TreeLane">
+                    <div class="TreeNode IsUnlocked" data-action="OpenLesson" data-lesson="LessonGuitar01">
+                      <div class="TreeNodeBadge">1</div>
+                      <div class="TreeNodeText">
+                        <div class="TreeNodeTitle">Guitar Basics</div>
+                        <div class="TreeNodeSub">Pluck the strings</div>
+                      </div>
+                    </div>
+
+                    <div class="TreeConnector"></div>
+
+                    <div class="TreeNode IsLocked" data-action="Toast" data-toast="Locked in this showcase.">
+                      <div class="TreeNodeBadge">2</div>
+                      <div class="TreeNodeText">
+                        <div class="TreeNodeTitle">Rhythm Patterns</div>
+                        <div class="TreeNodeSub">Coming soon</div>
+                      </div>
+                    </div>
+
+                    <div class="TreeConnector"></div>
+
+                    <div class="TreeNode IsLocked" data-action="Toast" data-toast="Locked in this showcase.">
+                      <div class="TreeNodeBadge">3</div>
+                      <div class="TreeNodeText">
+                        <div class="TreeNodeTitle">Chord Shapes</div>
+                        <div class="TreeNodeSub">Coming soon</div>
+                      </div>
+                    </div>
+
+                    <div class="TreeConnector"></div>
+
+                    <div class="TreeNode IsLocked" data-action="Toast" data-toast="Locked in this showcase.">
+                      <div class="TreeNodeBadge">4</div>
+                      <div class="TreeNodeText">
+                        <div class="TreeNodeTitle">Strumming</div>
+                        <div class="TreeNodeSub">Coming soon</div>
+                      </div>
+                    </div>
+
+                    <div class="TreeSpacer"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="MicroHint">
+                Scroll the tree, then tap Node 1 for a sample lesson.
+              </div>
+            </div>
+          </section>
+
+          <!-- SAMPLE LESSON (CLICK STRINGS) -->
+          <section class="Screen" data-screen="LessonGuitar01" data-title="Lesson 1">
+            <div class="Content">
+              <div class="LessonCard">
+                <div class="LessonHeader">
+                  <div class="LessonTitle">Pluck the Strings</div>
+                  <div class="LessonSub">Tap each string once to complete</div>
+                </div>
+
+                <div class="LessonProgress">
+                  <div class="LessonProgressFill" data-progress style="width: 0%"></div>
+                </div>
+
+                <div class="GuitarDeck" aria-label="Guitar strings">
+                  <button class="StringButton" type="button" data-string="E6">E</button>
+                  <button class="StringButton" type="button" data-string="A5">A</button>
+                  <button class="StringButton" type="button" data-string="D4">D</button>
+                  <button class="StringButton" type="button" data-string="G3">G</button>
+                  <button class="StringButton" type="button" data-string="B2">B</button>
+                  <button class="StringButton" type="button" data-string="E1">E</button>
+                </div>
+
+                <div class="LessonFooter">
+                  <button class="SecondaryButton" type="button" data-action="ResetLesson">Reset</button>
+                  <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Nice ! Let's move on to the next task! (Showcase)">
+                    Finish
+                  </button>
+                </div>
+              </div>
+
+              <div class="MicroHint">
+                Showcase : Only visual showcase
+              </div>
+            </div>
+          </section>
+
+          <!-- DAILY QUESTS -->
+          <section class="Screen" data-screen="DailyQuests" data-title="Daily Quests">
+            <div class="Content">
+              <div class="Quest">
+                <div class="QuestHeader">
+                  <span>Practice 5 minutes</span>
+                  <button class="MiniButton" type="button" data-action="Toast" data-toast="Rewards are visual in this showcase.">Reward</button>
+                </div>
+                <div class="QuestBar"><div style="width: 35%"></div></div>
+              </div>
+
+              <div class="Quest">
+                <div class="QuestHeader">
+                  <span>Complete 1 lesson</span>
+                  <button class="MiniButton" type="button" data-action="Toast" data-toast="Try Start Lessons on Home.">Reward</button>
+                </div>
+                <div class="QuestBar"><div style="width: 10%"></div></div>
+              </div>
+
+              <div class="Quest">
+                <div class="QuestHeader">
+                  <span>Log in today</span>
+                  <button class="MiniButton" type="button" data-action="Toast" data-toast="Quest completed.">Reward</button>
+                </div>
+                <div class="QuestBar"><div style="width: 100%"></div></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SKINS SHOP -->
+          <section class="Screen" data-screen="SkinsShop" data-title="Skins Shop">
+            <div class="Content">
+              <div class="Card">
+                <div class="ShopHeaderRow">
+                  <div class="ShopTitle">Cosmetic Skins</div>
+                  <div class="CoinPill CoinPill--small" aria-label="Coins">
+                    <span class="CoinIcon" aria-hidden="true">🪙</span>
+                    <span data-coins>250</span>
+                  </div>
+                </div>
+
+                <div class="MicroHint">
+                  Tip: Complete lessons to earn coins.
+                </div>
+              </div>
+
+              <div class="SkinGrid" aria-label="Skins">
+                <div class="SkinCard">
+                  <div class="SkinPreview SkinPreview--lime"></div>
+                  <div class="SkinMeta">
+                    <div class="SkinName">Neon Lime</div>
+                    <div class="SkinPrice"><span aria-hidden="true">🪙</span> 120</div>
+                  </div>
+                  <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Showcase only: Skin purchased (visual).">Buy</button>
+                </div>
+
+                <div class="SkinCard">
+                  <div class="SkinPreview SkinPreview--midnight"></div>
+                  <div class="SkinMeta">
+                    <div class="SkinName">Midnight Steel</div>
+                    <div class="SkinPrice"><span aria-hidden="true">🪙</span> 200</div>
+                  </div>
+                  <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Showcase only: Skin purchased (visual).">Buy</button>
+                </div>
+
+                <div class="SkinCard">
+                  <div class="SkinPreview SkinPreview--ember"></div>
+                  <div class="SkinMeta">
+                    <div class="SkinName">Ember Glow</div>
+                    <div class="SkinPrice"><span aria-hidden="true">🪙</span> 260</div>
+                  </div>
+                  <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Showcase only: Skin purchased (visual).">Buy</button>
+                </div>
+              </div>
+
+              <button class="SecondaryButton" type="button" data-nav="Home">Back to Home</button>
+            </div>
+          </section>
+
+          <!-- PREMIUM -->
+          <section class="Screen" data-screen="Premium" data-title="Go Premium">
+            <div class="Content">
+              <div class="Card">
+                <ul class="Perks">
+                  <li>No Ads</li>
+                  <li>Unlock More Instruments</li>
+                  <li>Faster Progression</li>
+                </ul>
+                <h2>
+                  Only for $X.XX !!
+                </h2>
+                <button class="PrimaryButton" type="button" data-action="Toast" data-nav="PaymentForPremium">
+                  Upgrade to Premium
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- PAYMENT FOR PREMIUM -->
+          <section class="Screen" data-screen="PaymentForPremium" data-title="Payment">
+            <div class="Content">
+              <div class="Card">
+                <div class="Card">
+                  <p class="payment-field">Card Number</p>
+                  <input value="XXXX-XXXX-XXXX" disabled />
+                </div>
+                <div class="Card">
+                  <p class="payment-field">Expiration date</p>
+                  <input value="MM/YYYY" disabled />
+                </div>
+                <div class="Card">
+                  <p class="payment-field">CVC</p>
+                  <input value="XXX" disabled />
+                </div>
+              </div>
+
+              <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Transaction successful" id="get-premium" data-nav="Profile">
+                Confirm payment
+              </button>
+            </div>
+          </section>
+
+          <!-- REMOVE PREMIUM CONFIRMATION -->
+          <section class="Screen" data-screen="removePremium" data-title="Remove premium">
+            <div class="Content">
+              <div class="Card">
+                Are you sure you want to remove premium ?
+              </div>
+              <button class="SecondaryButton" type="button" id="confirm-remove-premium" data-nav="Profile" data-toast="Premium removal successful" data-action="Toast">
+                yes
+              </button>
+              <button class="SecondaryButton" type="button" data-nav="Profile" data-toast="Premium removal cancelled" data-action="Toast">
+                No
+              </button>
+            </div>
+          </section>
+
+          <!-- ADVERTISEMENTS -->
+          <section class="Screen Screen--NoScroll page-ad ads" data-screen="ad" data-title="Sponsored">
+            <div class="AdFull" aria-label="Advertisement">
+              <div class="AdFullTop">
+                <div class="AdLabel">Sponsored</div>
+                <button class="close-ad AdCloseButton" type="button" aria-label="Close advertisement">×</button>
+              </div>
+
+              <div class="AdFullBody">
+                <div class="AdFullBadge">Advertisement</div>
+                <div class="AdFullTitle">Advertisement Goes Here (Press X to Close)</div>
+                <div class="AdFullSub">Advertisement Showcase</div>
+
+                <div class="AdFullVisual" aria-hidden="true">
+                  <div class="AdFullOrb"></div>
+                  <div class="AdFullWave"></div>
+                </div>
+              </div>
+
+              <div class="AdFullBottom">
+                <button class="PrimaryButton" type="button" data-action="Toast" data-toast="This advertisement is showcase only !">Learn More</button>
+                <button class="SecondaryButton close-ad" type="button" aria-label="Close advertisement">Close</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- LEADERBOARD -->
+          <section class="Screen" data-screen="Leaderboard" data-title="Leaderboard">
+            <div class="Content">
+              <div class="LeaderboardRow">
+                <span class="Rank">1</span>
+                <span>Player 1</span>
+                <span>Lvl 15</span>
+              </div>
+              <div class="LeaderboardRow">
+                <span class="Rank">2</span>
+                <span>Player 2</span>
+                <span>Lvl 12</span>
+              </div>
+              <div class="LeaderboardRow">
+                <span class="Rank">3</span>
+                <span>Player 3</span>
+                <span>Lvl 10</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- PROFILE -->
+          <section class="Screen" data-screen="Profile" data-title="Profile">
+            <div class="Content">
+              <div class="Avatar"></div>
+              <h3 class="ProfileName">Username</h3>
+
+              <div class="Stats">
+                <div>Total XP: 1250</div>
+                <div>Streak: 12 days</div>
+                <div>Lessons: 45</div>
+              </div>
+
+              <div class="Badges">
+                <span></span><span></span><span></span><span></span>
+              </div>
+
+              <button class="MainButton" type="button" data-nav="SkinsShop">Skins Shop</button>
+              <button class="MainButton Premium goPremium" type="button" data-nav="Premium">Go Premium</button>
+              <button class="PrimaryButton" type="button" data-nav="removePremium" id="remove-premium">
+                Remove Premium
+              </button>
+            </div>
+          </section>
+
+        </main>
+
+        <!-- BOTTOM NAV -->
+        <nav class="BottomNav">
+          <button type="button" data-nav="Home">Home</button>
+          <button type="button" data-nav="Leaderboard">Leaderboard</button>
+          <button type="button" data-nav="Profile">Profile</button>
+        </nav>
+
+        <!-- TOAST -->
+        <div class="Toast" data-toastbox aria-live="polite" aria-atomic="true"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
