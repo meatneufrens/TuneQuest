@@ -18,12 +18,18 @@
 
         <!-- HEADER -->
         <header class="Header">
-          <button class="HeaderButton" type="button" data-action="Back">‹</button>
-          <h1 class="HeaderTitle" data-title>Welcome</h1>
-          <button class="HeaderButton HeaderButton--ghost" type="button" data-action="Menu">⋯</button>
-        </header>
+          <button class="HeaderButton" type="button" data-action="Back" aria-label="Back">‹</button>
 
-        
+          <h1 class="HeaderTitle" data-title>Welcome</h1>
+
+          <div class="HeaderRight">
+            <div class="CoinPill" aria-label="Coins">
+              <span class="CoinIcon" aria-hidden="true">🪙</span>
+              <span data-coins>250</span>
+            </div>
+            <button class="HeaderButton HeaderButton--ghost" type="button" data-action="Menu" aria-label="Menu">⋯</button>
+          </div>
+        </header>
 
         <!-- SCREENS -->
         <main class="Screens">
@@ -100,12 +106,15 @@
               <button class="MainButton MainButton--glow" type="button" data-nav="SkillTree">Start Lessons</button>
               <button class="MainButton" type="button" data-nav="DailyQuests">Daily Quests</button>
               <button class="MainButton" type="button" data-nav="Leaderboard">Leaderboard</button>
+
+              <button class="MainButton" type="button" data-nav="SkinsShop">Skins Shop</button>
+
               <button class="MainButton Premium goPremium" type="button" data-nav="Premium">Go Premium</button>
             </div>
           </section>
 
-          <!-- SKILL TREE (SCROLLABLE) -->
-          <section class="Screen" data-screen="SkillTree" data-title="Skill Tree">
+          <!-- SKILL TREE -->
+          <section class="Screen Screen--NoScroll" data-screen="SkillTree" data-title="Skill Tree">
             <div class="Content">
               <div class="TreePanel">
                 <div class="TreeScroll" aria-label="Scrollable skill tree">
@@ -157,11 +166,6 @@
                 Scroll the tree, then tap Node 1 for a sample lesson.
               </div>
             </div>
-
-            <div class="ads small-ad">      
-              advertisement goes here
-            </div>
-
           </section>
 
           <!-- SAMPLE LESSON (CLICK STRINGS) -->
@@ -229,6 +233,56 @@
             </div>
           </section>
 
+          <!-- SKINS SHOP -->
+          <section class="Screen" data-screen="SkinsShop" data-title="Skins Shop">
+            <div class="Content">
+              <div class="Card">
+                <div class="ShopHeaderRow">
+                  <div class="ShopTitle">Cosmetic Skins</div>
+                  <div class="CoinPill CoinPill--small" aria-label="Coins">
+                    <span class="CoinIcon" aria-hidden="true">🪙</span>
+                    <span data-coins>250</span>
+                  </div>
+                </div>
+
+                <div class="MicroHint">
+                  Tip: Complete lessons to earn coins.
+                </div>
+              </div>
+
+              <div class="SkinGrid" aria-label="Skins">
+                <div class="SkinCard">
+                  <div class="SkinPreview SkinPreview--lime"></div>
+                  <div class="SkinMeta">
+                    <div class="SkinName">Neon Lime</div>
+                    <div class="SkinPrice"><span aria-hidden="true">🪙</span> 120</div>
+                  </div>
+                  <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Showcase only: Skin purchased (visual).">Buy</button>
+                </div>
+
+                <div class="SkinCard">
+                  <div class="SkinPreview SkinPreview--midnight"></div>
+                  <div class="SkinMeta">
+                    <div class="SkinName">Midnight Steel</div>
+                    <div class="SkinPrice"><span aria-hidden="true">🪙</span> 200</div>
+                  </div>
+                  <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Showcase only: Skin purchased (visual).">Buy</button>
+                </div>
+
+                <div class="SkinCard">
+                  <div class="SkinPreview SkinPreview--ember"></div>
+                  <div class="SkinMeta">
+                    <div class="SkinName">Ember Glow</div>
+                    <div class="SkinPrice"><span aria-hidden="true">🪙</span> 260</div>
+                  </div>
+                  <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Showcase only: Skin purchased (visual).">Buy</button>
+                </div>
+              </div>
+
+              <button class="SecondaryButton" type="button" data-nav="Home">Back to Home</button>
+            </div>
+          </section>
+
           <!-- PREMIUM -->
           <section class="Screen" data-screen="Premium" data-title="Go Premium">
             <div class="Content">
@@ -248,59 +302,70 @@
             </div>
           </section>
 
-          <!-- PAYMENT FOR PREMIUM   -->
-           <section class="Screen" data-screen="PaymentForPremium" data-title="Payment">
-              <div class="Content">
+          <!-- PAYMENT FOR PREMIUM -->
+          <section class="Screen" data-screen="PaymentForPremium" data-title="Payment">
+            <div class="Content">
+              <div class="Card">
                 <div class="Card">
-                  <div class="Card">
-                    <p class="payment-field">
-                      Card Number
-                    </p>
-                    <input value="XXXX-XXXX-XXXX" disabled>
-                  </div>
-                  <div class="Card">
-                    <p class="payment-field">
-                      Expiration date
-                    </p>
-                    <input value="MM/YYYY" disabled>
-                  </div>
-                  <div class="Card">
-                    <p class="payment-field">
-                      CVC
-                    </p>
-                    <input value="XXX" disabled>
-                  </div>           
+                  <p class="payment-field">Card Number</p>
+                  <input value="XXXX-XXXX-XXXX" disabled />
                 </div>
-                <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Transaction successful" id="get-premium" data-nav="Profile">
-                  Confirm payment
-                </button>
-              </div>
-           </section>
-
-          <!-- REMOVE PREMIUM CONFIRMATION  -->
-           <section class="Screen" data-screen="removePremium" data-title="Remove premium">
-              <div class="Content">
                 <div class="Card">
-                  Are you sure you want to remove premium ?
+                  <p class="payment-field">Expiration date</p>
+                  <input value="MM/YYYY" disabled />
                 </div>
-              <button class="SecondaryButton" type="button" id="confirm-remove-premium" data-nav="Profile" data-toast="Premium removal successful" data-action="Toast">
-                  yes
-              </button>
-              <button class="SecondaryButton" type="button" data-nav="Profile" data-toast="Premium removal cancelled" data-action="Toast">
-                  No
-              </button>
+                <div class="Card">
+                  <p class="payment-field">CVC</p>
+                  <input value="XXX" disabled />
+                </div>
               </div>
-           </section>
 
-
-          <!-- AD -->
-          <section class="Screen ads page-ad" data-screen="ad" data-title="get premium to remove ads" >
-            Advertisement goes here
-            <button class="close-ad">
-              X
-            </button>
+              <button class="PrimaryButton" type="button" data-action="Toast" data-toast="Transaction successful" id="get-premium" data-nav="Profile">
+                Confirm payment
+              </button>
+            </div>
           </section>
 
+          <!-- REMOVE PREMIUM CONFIRMATION -->
+          <section class="Screen" data-screen="removePremium" data-title="Remove premium">
+            <div class="Content">
+              <div class="Card">
+                Are you sure you want to remove premium ?
+              </div>
+              <button class="SecondaryButton" type="button" id="confirm-remove-premium" data-nav="Profile" data-toast="Premium removal successful" data-action="Toast">
+                yes
+              </button>
+              <button class="SecondaryButton" type="button" data-nav="Profile" data-toast="Premium removal cancelled" data-action="Toast">
+                No
+              </button>
+            </div>
+          </section>
+
+          <!-- ADVERTISEMENTS -->
+          <section class="Screen Screen--NoScroll page-ad ads" data-screen="ad" data-title="Sponsored">
+            <div class="AdFull" aria-label="Advertisement">
+              <div class="AdFullTop">
+                <div class="AdLabel">Sponsored</div>
+                <button class="close-ad AdCloseButton" type="button" aria-label="Close advertisement">×</button>
+              </div>
+
+              <div class="AdFullBody">
+                <div class="AdFullBadge">Advertisement</div>
+                <div class="AdFullTitle">Advertisement Goes Here (Press X to Close)</div>
+                <div class="AdFullSub">Advertisement Showcase</div>
+
+                <div class="AdFullVisual" aria-hidden="true">
+                  <div class="AdFullOrb"></div>
+                  <div class="AdFullWave"></div>
+                </div>
+              </div>
+
+              <div class="AdFullBottom">
+                <button class="PrimaryButton" type="button" data-action="Toast" data-toast="This advertisement is showcase only !">Learn More</button>
+                <button class="SecondaryButton close-ad" type="button" aria-label="Close advertisement">Close</button>
+              </div>
+            </div>
+          </section>
 
           <!-- LEADERBOARD -->
           <section class="Screen" data-screen="Leaderboard" data-title="Leaderboard">
@@ -338,9 +403,11 @@
               <div class="Badges">
                 <span></span><span></span><span></span><span></span>
               </div>
+
+              <button class="MainButton" type="button" data-nav="SkinsShop">Skins Shop</button>
               <button class="MainButton Premium goPremium" type="button" data-nav="Premium">Go Premium</button>
               <button class="PrimaryButton" type="button" data-nav="removePremium" id="remove-premium">
-                  remove premium
+                Remove Premium
               </button>
             </div>
           </section>
